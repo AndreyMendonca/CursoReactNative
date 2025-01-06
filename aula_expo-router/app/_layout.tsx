@@ -10,6 +10,7 @@ export default function RootLayout(){
             <Stack.Screen name="(aux)/termos" options={{title:"termos de uso"}} />
             <Stack.Screen name="auth/login" options={{title:"login"}}/>
             <Stack.Screen name="photos" options={{title:"FOTOS"}} />
+            <Stack.Screen name="profile/[name]" />
         </Stack>
     )
 }
