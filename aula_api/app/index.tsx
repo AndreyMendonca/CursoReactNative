@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Movie } from "../types/movie";
 import { getMovieList } from "../services/movies";
 import { MovieItem, MovieItemSkeleton } from "../components/movie-item";
+import React from "react";
 
 export default function Screen(){
     const [erro, setErro] = useState(false);
