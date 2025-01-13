@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { req } from "../lib/axios";
 
 export default function Screen(){
 
@@ -18,19 +19,18 @@ export default function Screen(){
     }
 
     const handleClickPost = async () =>{
-        const response =  await axios.post(
-            'https://jsonplaceholder.typicode.com//posts',
-            {
-                title: 'Novo Post',
-                body: 'Cordo do novo post',
-                userId: 99
-            },
-            {
-                headers:{
-                    "Authorization" : 'Bearer 123'
-                }
+        const response = await req.post('/posts',{
+            title: 'Novo Post',
+            body: 'Corpo do novo post',
+            userId: 99
+        },
+        {
+            headers:{
+                "Authorization" : 'Bearer 123'
             }
-        )
+        })
+
+    
         if(response.status === 201){
             console.log(response.data)
         }else{
