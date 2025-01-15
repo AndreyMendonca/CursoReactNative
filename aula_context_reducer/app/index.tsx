@@ -3,6 +3,8 @@ import { Area } from "../components/area1";
 import { useContext, useReducer, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import { ageReducer } from "../reducers/age";
+import { User } from "../types/user";
+
 
 export default function Screen(){
 
@@ -11,7 +13,16 @@ export default function Screen(){
     const auth = useContext(AuthContext);
 
     const handleClick = () =>{
-        auth?.setData("Andrey")
+        const newUser: User = {
+            name: 'Andrey',
+            email: 'teste@gmail.com'
+        }
+
+        auth?.dispatch({
+            type: 'SET_USER',
+            payload:newUser,
+        })
+        
     }
 
     const handleIncreaseAge = () =>{
@@ -24,7 +35,7 @@ export default function Screen(){
         <View style={styles.container}>
             <Text>Eu tenho {ageReducerState} anos</Text>
             <Button title="Aumentar idade reducer" onPress={handleIncreaseAge}/>
-            <Text>Estou aqui {auth?.data}</Text>
+            <Text>Estou aqui {auth?.data.user?.email ?? "Usuari nao definido"}</Text>
             <Area/>
             <Button title="Alterar nome" onPress={handleClick}/>
         </View>

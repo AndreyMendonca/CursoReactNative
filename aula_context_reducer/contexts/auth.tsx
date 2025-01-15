@@ -1,11 +1,16 @@
-import { Children, createContext, useState } from "react";
+import { Children, createContext, useReducer, useState } from "react";
+import { User } from "../types/user";
 
 type AuthContextType = null | {
-    data: string,
-    setData: React.Dispatch<React.SetStateAction<string>>;
+    data: AuthData;
+    dispatch: React.Dispatch<AuthReducerAction>;
 }
 
 export const AuthContext = createContext<AuthContextType>(null);
+
+const initialState: AuthData = {
+    user: null
+}
 
 type Props = {
     children : React.ReactNode;
@@ -13,11 +18,29 @@ type Props = {
 
 export const AuthProvider = ({children}:Props) => {
 
-    const [data, setData] = useState("Cicrano");
+    const [data, dispatch] = useReducer(AuthReducer,initialState)
 
     return (
-        <AuthContext.Provider value={{data, setData}}>
+        <AuthContext.Provider value={{data, dispatch}}>
             {children}
         </AuthContext.Provider>
     )
+}
+
+type AuthData = {
+    user: User | null;
+}
+
+type AuthReducerAction ={
+    type : 'SET_USER';
+    payload: User;
+}
+
+const AuthReducer = (state:AuthData, action:AuthReducerAction):AuthData =>{
+    switch(action.type){
+        case 'SET_USER':
+            return {...state, user: action.payload}
+        default:
+            return state;
+    }
 }

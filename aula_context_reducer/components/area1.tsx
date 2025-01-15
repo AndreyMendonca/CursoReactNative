@@ -7,6 +7,6 @@ export const Area = () =>{
     const auth = useContext(AuthContext)
 
     return (
-        <Text>Area 1 {auth?.data}</Text>
+        <Text>Area 1 {auth?.data.user?.email}</Text>
     )
 }
