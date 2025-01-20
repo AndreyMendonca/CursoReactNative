@@ -4,11 +4,14 @@ import { useContext, useReducer, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import { ageReducer } from "../reducers/age";
 import { User } from "../types/user";
+import { ThemeContext, ThemeProvider } from "../contexts/theme";
 
 
 export default function Screen(){
 
     const [ageReducerState, ageReducerDispatch] = useReducer(ageReducer, 10);
+
+    const thema = useContext(ThemeContext)
 
     const auth = useContext(AuthContext);
 
@@ -33,6 +36,7 @@ export default function Screen(){
 
     return (
         <View style={styles.container}>
+            <Text>Tema do aplicativo {thema?.theme} anos</Text>
             <Text>Eu tenho {ageReducerState} anos</Text>
             <Button title="Aumentar idade reducer" onPress={handleIncreaseAge}/>
             <Text>Estou aqui {auth?.data.user?.email ?? "Usuari nao definido"}</Text>
