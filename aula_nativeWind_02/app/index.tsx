@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import {useColorScheme} from 'nativewind'
 import { Button, Text, View } from "react-native";
 
@@ -16,6 +17,8 @@ export default function Index() {
             <Button title="LIGHT" onPress={() => setColorScheme('light')}/>
             <Button title="SYSTEM" onPress={() => setColorScheme('system')}/>
 
+            <Link href={"/tela"}>Acessar layout do zero</Link>
+            
         </View>
   );
 }
